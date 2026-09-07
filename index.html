@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj Tour Travels · India in Motion</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#071827',
+                        tealDeep: '#0B3440',
+                        tealElectric: '#19B7A5',
+                        ice: '#E7F2F1',
+                        softWhite: '#F7F8F5',
+                        coral: '#FF7058',
+                        charcoal: '#10161B',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #071827;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #19B7A5;
+            border-radius: 3px;
+        }
+        
+        .glass-panel {
+            background: rgba(11, 52, 64, 0.35);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(231, 242, 241, 0.12);
+        }
+
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(11, 52, 64, 0.08);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(25, 183, 165, 0.5);
+        }
+
+        /* Hide scrollbars for clean drag/scroll galleries */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-navy text-softWhite font-sans antialiased selection:bg-tealElectric selection:text-navy overflow-x-hidden">
+
+    <!-- PAGE PROGRESS INDICATOR -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] bg-tealElectric z-50 transition-all duration-150 w-0"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header id="mainHeader" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Logo & Heritage Label -->
+            <a href="#" class="group flex flex-col">
+                <span class="font-serif text-xl lg:text-2xl font-bold tracking-widest text-softWhite group-hover:text-tealElectric transition-colors">RAJ TOUR TRAVELS</span>
+                <span class="text-[10px] font-sans tracking-[0.25em] text-tealElectric uppercase font-semibold">EST. 1995 · INDIA</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-8 text-xs font-semibold tracking-widest uppercase">
+                <a href="#destinations" class="text-softWhite/80 hover:text-tealElectric transition-colors">Explore</a>
+                <a href="#destinations" class="text-softWhite/80 hover:text-tealElectric transition-colors">Destinations</a>
+                <a href="#journeys" class="text-softWhite/80 hover:text-tealElectric transition-colors">Journeys</a>
+                <a href="#interactive-map" class="text-softWhite/80 hover:text-tealElectric transition-colors">Experiences</a>
+                <a href="#journal" class="text-softWhite/80 hover:text-tealElectric transition-colors">Journal</a>
+                <a href="#about" class="text-softWhite/80 hover:text-tealElectric transition-colors">About</a>
+            </nav>
+
+            <!-- Action & Search -->
+            <div class="hidden lg:flex items-center space-x-6">
+                <button onclick="toggleSearchModal()" aria-label="Search" class="text-softWhite/80 hover:text-tealElectric transition-colors p-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+                <a href="#planner" class="relative group overflow-hidden rounded-full bg-tealElectric text-navy px-6 py-3 font-semibold text-xs tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_25px_rgba(25,183,165,0.6)]">
+                    <span class="relative z-10 flex items-center gap-2">Plan My Trip <span class="group-hover:translate-x-1 transition-transform">→</span></span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2 text-softWhite hover:text-tealElectric focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE FULLSCREEN MENU -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-navy/98 backdrop-blur-2xl flex flex-col justify-between p-8 opacity-0 pointer-events-none transition-all duration-500">
+        <div class="flex justify-between items-center">
+            <div>
+                <span class="font-serif text-lg font-bold tracking-widest text-softWhite">RAJ TOUR TRAVELS</span>
+                <p class="text-[9px] text-tealElectric uppercase tracking-widest">EST. 1995 · INDIA</p>
+            </div>
+            <button onclick="toggleMobileMenu()" class="p-2 text-softWhite hover:text-coral">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-2xl font-semibold">
+            <a href="#destinations" onclick="toggleMobileMenu()" class="hover:text-tealElectric transition-colors">Destinations</a>
+            <a href="#interactive-map" onclick="toggleMobileMenu()" class="hover:text-tealElectric transition-colors">Interactive India</a>
+            <a href="#journeys" onclick="toggleMobileMenu()" class="hover:text-tealElectric transition-colors">Featured Journeys</a>
+            <a href="#journal" onclick="toggleMobileMenu()" class="hover:text-tealElectric transition-colors">Travel Journal</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="hover:text-tealElectric transition-colors">Guest Stories</a>
+            <a href="#planner" onclick="toggleMobileMenu()" class="hover:text-tealElectric transition-colors text-tealElectric">Plan My Trip →</a>
+        </nav>
+        <div class="text-center text-xs text-softWhite/50 space-y-2">
+            <p>Direct Enquiries: +91 975 668 6666</p>
+            <p>info@rajtourtravels.com</p>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Background Parallax Image -->
+        <div class="absolute inset-0 z-0">
+            <img id="heroBg" src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=2400&q=85" 
+                 alt="Pangong Lake Ladakh Landscape" 
+                 class="w-full h-full object-cover object-center scale-105 transition-transform duration-1000 ease-out">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-navy/80 via-transparent to-navy/80"></div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12">
+            <!-- Eyebrow -->
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass-panel mb-8 border border-tealElectric/30">
+                <span class="w-2 h-2 rounded-full bg-tealElectric animate-ping"></span>
+                <span class="text-xs font-semibold tracking-widest text-tealElectric uppercase">RAJ TOUR TRAVELS · EST. 1995</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight text-softWhite mb-8 leading-[1.08]">
+                India, <br>
+                <span class="italic font-light text-tealElectric">but make it</span> unforgettable.
+            </h1>
+
+            <!-- Supporting Text -->
+            <p class="max-w-2xl mx-auto text-base md:text-lg text-ice/80 font-light mb-12 tracking-wide leading-relaxed">
+                Private journeys. Extraordinary places. Designed entirely around you.
+            </p>
+
+            <!-- Hero CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+                <a href="#planner" class="w-full sm:w-auto px-8 py-4 rounded-full bg-tealElectric text-navy font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(25,183,165,0.7)] hover:scale-105 flex items-center justify-center gap-3">
+                    Start Your Journey <span>→</span>
+                </a>
+                <a href="#destinations" class="w-full sm:w-auto px-8 py-4 rounded-full glass-panel text-softWhite hover:bg-tealDeep/50 font-semibold text-sm tracking-wider uppercase transition-all duration-300 border border-ice/20 hover:border-tealElectric flex items-center justify-center gap-2">
+                    Explore India
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Indicators & Location -->
+        <div class="absolute bottom-10 left-6 lg:left-16 z-20 hidden md:flex flex-col text-xs font-serif space-y-2 text-ice/60 border-l border-tealElectric/40 pl-4">
+            <span class="text-tealElectric font-bold">01 / 03</span>
+            <span class="tracking-widest uppercase text-[10px]">Pangong Lake, Ladakh</span>
+        </div>
+
+        <div class="absolute bottom-10 right-6 lg:right-16 z-20 text-right hidden md:block">
+            <p class="text-[10px] tracking-widest uppercase text-ice/60">Scroll to Begin</p>
+            <div class="w-4 h-8 border-2 border-tealElectric/50 rounded-full mx-auto mt-2 flex justify-center p-1">
+                <div class="w-1 h-2 bg-tealElectric rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 01 — INTRO -->
+    <section class="bg-softWhite text-charcoal py-28 px-6 lg:px-16 transition-colors">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Text -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs font-bold tracking-[0.3em] text-tealDeep uppercase">NOT JUST SOMEWHERE TO GO.</span>
+                    <h2 class="font-serif text-4xl md:text-6xl text-navy font-light leading-tight">
+                        Somewhere to feel.
+                    </h2>
+                    <p class="text-lg text-charcoal/80 font-light leading-relaxed pt-2">
+                        Since 1995, Raj Tour Travels has quietly redefined private exploration across India. We move beyond packaged itineraries into nuanced, immersive landscapes—where every transfer is seamless, every guide is an insider, and every stay reflects understated Indian hospitality.
+                    </p>
+                    <p class="text-base text-charcoal/70 leading-relaxed font-light">
+                        From the remote passes of Ladakh to the silent backwaters of Kerala and the sacred ghats of Varanasi, our tailor-made journeys are crafted for travelers seeking memory, depth, and total peace of mind.
+                    </p>
+                </div>
+
+                <!-- Right Editorial Image -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
+                        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=85" alt="Traveler overlooking Taj Mahal" class="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-softWhite">
+                            <p class="text-xs font-semibold tracking-widest uppercase text-tealElectric">Tailor-Made Private Journeys</p>
+                            <p class="font-serif text-xl">Agra & Beyond</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Blocks -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-16 border-t border-charcoal/10">
+                <div class="p-6 rounded-xl bg-ice/40 hover:bg-ice transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-full bg-tealDeep/10 flex items-center justify-center text-tealDeep mb-4 group-hover:scale-110 group-hover:bg-tealElectric group-hover:text-navy transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-navy text-lg">Established 1995</h3>
+                    <p class="text-xs text-charcoal/70 mt-1">Over 30 years of verified local travel excellence across India.</p>
+                </div>
+
+                <div class="p-6 rounded-xl bg-ice/40 hover:bg-ice transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-full bg-tealDeep/10 flex items-center justify-center text-tealDeep mb-4 group-hover:scale-110 group-hover:bg-tealElectric group-hover:text-navy transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-navy text-lg">A-Class Agency</h3>
+                    <p class="text-xs text-charcoal/70 mt-1">Registered A-Class Tour Operator headquartered in Agra.</p>
+                </div>
+
+                <div class="p-6 rounded-xl bg-ice/40 hover:bg-ice transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-full bg-tealDeep/10 flex items-center justify-center text-tealDeep mb-4 group-hover:scale-110 group-hover:bg-tealElectric group-hover:text-navy transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-navy text-lg">Private Tours</h3>
+                    <p class="text-xs text-charcoal/70 mt-1">Dedicated private luxury vehicles and personal local chauffeurs.</p>
+                </div>
+
+                <div class="p-6 rounded-xl bg-ice/40 hover:bg-ice transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-full bg-tealDeep/10 flex items-center justify-center text-tealDeep mb-4 group-hover:scale-110 group-hover:bg-tealElectric group-hover:text-navy transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-navy text-lg">Tailor-Made</h3>
+                    <p class="text-xs text-charcoal/70 mt-1">Bespoke luxury itineraries tailored to your dates, speed, and budget.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 02 — DESTINATIONS -->
+    <section id="destinations" class="py-28 px-6 lg:px-16 bg-navy relative overflow-hidden">
+        <div class="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between">
+            <div>
+                <span class="text-xs font-bold tracking-[0.3em] text-tealElectric uppercase">CURATED REGIONS</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-softWhite mt-2 font-light">Destinations That Inspire</h2>
+            </div>
+            <div class="flex items-center space-x-4 mt-6 md:mt-0">
+                <button onclick="scrollGallery(-400)" aria-label="Previous destination" class="w-12 h-12 rounded-full border border-tealElectric/30 flex items-center justify-center text-tealElectric hover:bg-tealElectric hover:text-navy transition-all">←</button>
+                <button onclick="scrollGallery(400)" aria-label="Next destination" class="w-12 h-12 rounded-full border border-tealElectric/30 flex items-center justify-center text-tealElectric hover:bg-tealElectric hover:text-navy transition-all">→</button>
+            </div>
+        </div>
+
+        <!-- Horizontal Interactive Gallery -->
+        <div id="destContainer" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-8">
+            <!-- Rajasthan Panel -->
+            <div class="min-w-[300px] md:min-w-[380px] h-[520px] relative rounded-2xl overflow-hidden group flex-shrink-0 border border-tealDeep transition-all duration-500 hover:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80" alt="Rajasthan Palace" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-coral">Royal Heritage</span>
+                    <h3 class="font-serif text-3xl text-softWhite mt-1">Rajasthan</h3>
+                    <p class="text-xs text-ice/70 mt-2 line-clamp-2">Fortresses of Jaipur, lake palaces of Udaipur, and golden dunes.</p>
+                    <a href="#planner" class="inline-flex items-center gap-2 text-xs font-semibold text-tealElectric uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore →</a>
+                </div>
+            </div>
+
+            <!-- Golden Triangle Panel -->
+            <div class="min-w-[300px] md:min-w-[380px] h-[520px] relative rounded-2xl overflow-hidden group flex-shrink-0 border border-tealDeep transition-all duration-500 hover:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Taj Mahal Agra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-tealElectric">Classic Circuit</span>
+                    <h3 class="font-serif text-3xl text-softWhite mt-1">Golden Triangle</h3>
+                    <p class="text-xs text-ice/70 mt-2 line-clamp-2">Delhi, Agra, and Jaipur—the essential cultural epicenter of North India.</p>
+                    <a href="#planner" class="inline-flex items-center gap-2 text-xs font-semibold text-tealElectric uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore →</a>
+                </div>
+            </div>
+
+            <!-- Kerala Panel -->
+            <div class="min-w-[300px] md:min-w-[380px] h-[520px] relative rounded-2xl overflow-hidden group flex-shrink-0 border border-tealDeep transition-all duration-500 hover:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" alt="Kerala Backwaters" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-tealElectric">Tropical Sanctuary</span>
+                    <h3 class="font-serif text-3xl text-softWhite mt-1">Kerala</h3>
+                    <p class="text-xs text-ice/70 mt-2 line-clamp-2">Serene backwater houseboats, spice plantations, and Arabian Sea beaches.</p>
+                    <a href="#planner" class="inline-flex items-center gap-2 text-xs font-semibold text-tealElectric uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore →</a>
+                </div>
+            </div>
+
+            <!-- Varanasi Panel -->
+            <div class="min-w-[300px] md:min-w-[380px] h-[520px] relative rounded-2xl overflow-hidden group flex-shrink-0 border border-tealDeep transition-all duration-500 hover:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=800&q=80" alt="Varanasi Ganges Ghats" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-coral">Sacred Soul</span>
+                    <h3 class="font-serif text-3xl text-softWhite mt-1">Varanasi</h3>
+                    <p class="text-xs text-ice/70 mt-2 line-clamp-2">Ancient riverboat dawn cruises and evening Ganga Aarti ceremonies.</p>
+                    <a href="#planner" class="inline-flex items-center gap-2 text-xs font-semibold text-tealElectric uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore →</a>
+                </div>
+            </div>
+
+            <!-- Himalayas Panel -->
+            <div class="min-w-[300px] md:min-w-[380px] h-[520px] relative rounded-2xl overflow-hidden group flex-shrink-0 border border-tealDeep transition-all duration-500 hover:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" alt="Himalayas Mountains" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-tealElectric">Alpine Wonders</span>
+                    <h3 class="font-serif text-3xl text-softWhite mt-1">Himalayas</h3>
+                    <p class="text-xs text-ice/70 mt-2 line-clamp-2">High-altitude Buddhist monasteries, mountain passes, and tranquil valleys.</p>
+                    <a href="#planner" class="inline-flex items-center gap-2 text-xs font-semibold text-tealElectric uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore →</a>
+                </div>
+            </div>
+
+            <!-- Wildlife Panel -->
+            <div class="min-w-[300px] md:min-w-[380px] h-[520px] relative rounded-2xl overflow-hidden group flex-shrink-0 border border-tealDeep transition-all duration-500 hover:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=800&q=80" alt="Tiger Safari Wildlife" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-coral">Wild Expeditions</span>
+                    <h3 class="font-serif text-3xl text-softWhite mt-1">Wildlife</h3>
+                    <p class="text-xs text-ice/70 mt-2 line-clamp-2">Private tiger safaris in Ranthambore and Bandhavgarh national parks.</p>
+                    <a href="#planner" class="inline-flex items-center gap-2 text-xs font-semibold text-tealElectric uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03 — INTERACTIVE INDIA EXPLORATION -->
+    <section id="interactive-map" class="py-28 px-6 lg:px-16 bg-tealDeep/30 border-y border-tealDeep/50 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold tracking-[0.3em] text-tealElectric uppercase">DIGITAL ROUTE VISUALIZER</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-softWhite mt-2 font-light">Interactive India Exploration</h2>
+                <p class="text-sm text-ice/70 mt-4">Select a destination node on our stylized digital canvas to preview regional experiences.</p>
+            </div>
+
+            <!-- Interactive UI Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <!-- Map / Vector Stylized Canvas (Left 7 Cols) -->
+                <div class="lg:col-span-7 relative h-[450px] sm:h-[500px] glass-panel rounded-3xl p-6 flex items-center justify-center overflow-hidden border border-tealElectric/20">
+                    <!-- SVG Route Lines Visualizing Connections -->
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 600 500" fill="none">
+                        <!-- Curved Glowing Animated Paths -->
+                        <path d="M 280 100 L 220 200 L 320 220 L 410 230 L 210 380 L 260 320" stroke="#19B7A5" stroke-width="2" stroke-dasharray="6 6" opacity="0.4" />
+                        <circle cx="280" cy="100" r="4" fill="#FF7058" />
+                        <circle cx="220" cy="200" r="4" fill="#19B7A5" />
+                        <circle cx="320" cy="220" r="4" fill="#19B7A5" />
+                        <circle cx="410" cy="230" r="4" fill="#19B7A5" />
+                        <circle cx="210" cy="380" r="4" fill="#19B7A5" />
+                        <circle cx="260" cy="320" r="4" fill="#19B7A5" />
+                    </svg>
+
+                    <!-- Interactive Glowing Nodes -->
+                    <!-- Ladakh -->
+                    <button onclick="updateMapDetail('ladakh')" class="absolute top-[20%] left-[46%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none">
+                        <span class="absolute -inset-3 rounded-full bg-tealElectric/30 animate-ping"></span>
+                        <span class="relative w-5 h-5 rounded-full bg-tealElectric flex items-center justify-center text-[10px] text-navy font-bold shadow-[0_0_15px_#19B7A5]">01</span>
+                        <span class="absolute left-7 top-0 text-[11px] font-semibold text-softWhite whitespace-nowrap bg-navy/80 px-2 py-0.5 rounded border border-tealElectric/30">Ladakh</span>
+                    </button>
+
+                    <!-- Rajasthan -->
+                    <button onclick="updateMapDetail('rajasthan')" class="absolute top-[40%] left-[36%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none">
+                        <span class="relative w-5 h-5 rounded-full bg-tealElectric flex items-center justify-center text-[10px] text-navy font-bold shadow-[0_0_15px_#19B7A5]">02</span>
+                        <span class="absolute right-7 top-0 text-[11px] font-semibold text-softWhite whitespace-nowrap bg-navy/80 px-2 py-0.5 rounded border border-tealElectric/30">Rajasthan</span>
+                    </button>
+
+                    <!-- Agra -->
+                    <button onclick="updateMapDetail('agra')" class="absolute top-[44%] left-[53%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none">
+                        <span class="relative w-5 h-5 rounded-full bg-coral flex items-center justify-center text-[10px] text-navy font-bold shadow-[0_0_15px_#FF7058]">03</span>
+                        <span class="absolute left-7 top-0 text-[11px] font-semibold text-softWhite whitespace-nowrap bg-navy/80 px-2 py-0.5 rounded border border-coral/30">Agra</span>
+                    </button>
+
+                    <!-- Varanasi -->
+                    <button onclick="updateMapDetail('varanasi')" class="absolute top-[46%] left-[68%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none">
+                        <span class="relative w-5 h-5 rounded-full bg-tealElectric flex items-center justify-center text-[10px] text-navy font-bold shadow-[0_0_15px_#19B7A5]">04</span>
+                        <span class="absolute left-7 top-0 text-[11px] font-semibold text-softWhite whitespace-nowrap bg-navy/80 px-2 py-0.5 rounded border border-tealElectric/30">Varanasi</span>
+                    </button>
+
+                    <!-- Mumbai -->
+                    <button onclick="updateMapDetail('mumbai')" class="absolute top-[64%] left-[43%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none">
+                        <span class="relative w-5 h-5 rounded-full bg-tealElectric flex items-center justify-center text-[10px] text-navy font-bold shadow-[0_0_15px_#19B7A5]">05</span>
+                        <span class="absolute right-7 top-0 text-[11px] font-semibold text-softWhite whitespace-nowrap bg-navy/80 px-2 py-0.5 rounded border border-tealElectric/30">Mumbai</span>
+                    </button>
+
+                    <!-- Kerala -->
+                    <button onclick="updateMapDetail('kerala')" class="absolute top-[76%] left-[35%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none">
+                        <span class="relative w-5 h-5 rounded-full bg-tealElectric flex items-center justify-center text-[10px] text-navy font-bold shadow-[0_0_15px_#19B7A5]">06</span>
+                        <span class="absolute left-7 top-0 text-[11px] font-semibold text-softWhite whitespace-nowrap bg-navy/80 px-2 py-0.5 rounded border border-tealElectric/30">Kerala</span>
+                    </button>
+                </div>
+
+                <!-- Active Destination Preview Card (Right 5 Cols) -->
+                <div class="lg:col-span-5">
+                    <div id="mapPreviewCard" class="glass-panel p-8 rounded-3xl border border-tealElectric/30 transition-all duration-500">
+                        <img id="mapCardImg" src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Destination Preview" class="w-full h-56 object-cover rounded-2xl mb-6 shadow-xl">
+                        <span id="mapCardTag" class="text-xs font-bold uppercase tracking-widest text-coral">HQ & Monument Hub</span>
+                        <h3 id="mapCardTitle" class="font-serif text-3xl text-softWhite mt-1">Agra</h3>
+                        <p id="mapCardDesc" class="text-sm text-ice/80 font-light mt-3 leading-relaxed">
+                            Home of the iconic Taj Mahal and Agra Fort. Our central operations hub guarantees top-rated chauffeur transfers and instant local assistance.
+                        </p>
+                        <a href="#planner" class="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-full bg-tealElectric text-navy font-semibold text-xs tracking-wider uppercase hover:shadow-[0_0_20px_rgba(25,183,165,0.6)] transition-all">
+                            Explore Destination →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 04 — FEATURED JOURNEYS -->
+    <section id="journeys" class="py-28 px-6 lg:px-16 bg-softWhite text-charcoal">
+        <div class="max-w-7xl mx-auto mb-16">
+            <span class="text-xs font-bold tracking-[0.3em] text-tealDeep uppercase">VERIFIED TOUR PROGRAMMING</span>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy mt-2 font-light">Handpicked for Unforgettable Experiences</h2>
+        </div>
+
+        <!-- Large Horizontal Tour Cards -->
+        <div class="max-w-7xl mx-auto space-y-12">
+            
+            <!-- Tour 01 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-ice/30 rounded-3xl p-6 lg:p-8 border border-charcoal/10 hover:shadow-xl transition-all">
+                <div class="lg:col-span-6 overflow-hidden rounded-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80" alt="Golden Triangle Tour" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="flex items-center gap-4 text-xs font-semibold text-tealDeep uppercase tracking-wider">
+                        <span>Delhi · Agra · Jaipur</span>
+                        <span>•</span>
+                        <span>4 to 5 Days</span>
+                    </div>
+                    <h3 class="font-serif text-3xl text-navy">Golden Triangle Tour</h3>
+                    <p class="text-sm text-charcoal/80 font-light leading-relaxed">
+                        Experience India's most celebrated cultural corridor with private luxury car transfers, sunrise access at the Taj Mahal, and guided fortress walks in Jaipur.
+                    </p>
+                    <div class="pt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-widest text-tealDeep">Private Luxury Chauffeur Included</span>
+                        <button onclick="openTourModal('golden-triangle')" class="px-6 py-3 rounded-full bg-navy text-softWhite text-xs font-semibold tracking-wider uppercase hover:bg-tealElectric hover:text-navy transition-all">View Journey →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 02 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-ice/30 rounded-3xl p-6 lg:p-8 border border-charcoal/10 hover:shadow-xl transition-all">
+                <div class="lg:col-span-6 overflow-hidden rounded-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1000&q=80" alt="Golden Triangle with Tiger Safari" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="flex items-center gap-4 text-xs font-semibold text-tealDeep uppercase tracking-wider">
+                        <span>Delhi · Agra · Ranthambore · Jaipur</span>
+                        <span>•</span>
+                        <span>7 Days</span>
+                    </div>
+                    <h3 class="font-serif text-3xl text-navy">Golden Triangle & Tiger Tour</h3>
+                    <p class="text-sm text-charcoal/80 font-light leading-relaxed">
+                        Combine the magnificent heritage monuments of North India with private open-top 4x4 tiger safaris inside Ranthambore National Park.
+                    </p>
+                    <div class="pt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-widest text-coral">Wildlife & Heritage</span>
+                        <button onclick="openTourModal('tiger-tour')" class="px-6 py-3 rounded-full bg-navy text-softWhite text-xs font-semibold tracking-wider uppercase hover:bg-tealElectric hover:text-navy transition-all">View Journey →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 03 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-ice/30 rounded-3xl p-6 lg:p-8 border border-charcoal/10 hover:shadow-xl transition-all">
+                <div class="lg:col-span-6 overflow-hidden rounded-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1000&q=80" alt="Golden Triangle with Varanasi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="flex items-center gap-4 text-xs font-semibold text-tealDeep uppercase tracking-wider">
+                        <span>Delhi · Jaipur · Agra · Varanasi</span>
+                        <span>•</span>
+                        <span>8 Days</span>
+                    </div>
+                    <h3 class="font-serif text-3xl text-navy">Golden Triangle with Varanasi</h3>
+                    <p class="text-sm text-charcoal/80 font-light leading-relaxed">
+                        Enrich your Golden Triangle expedition with a flight into Varanasi—attending evening Aarti on the Ganges ghats and private dawn boat cruises.
+                    </p>
+                    <div class="pt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-widest text-tealDeep">Spiritual Immersion</span>
+                        <button onclick="openTourModal('varanasi-tour')" class="px-6 py-3 rounded-full bg-navy text-softWhite text-xs font-semibold tracking-wider uppercase hover:bg-tealElectric hover:text-navy transition-all">View Journey →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 04 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-ice/30 rounded-3xl p-6 lg:p-8 border border-charcoal/10 hover:shadow-xl transition-all">
+                <div class="lg:col-span-6 overflow-hidden rounded-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80" alt="Kerala Backwater & Beaches" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="flex items-center gap-4 text-xs font-semibold text-tealDeep uppercase tracking-wider">
+                        <span>Cochin · Munnar · Alleppey · Kovalam</span>
+                        <span>•</span>
+                        <span>6 Days</span>
+                    </div>
+                    <h3 class="font-serif text-3xl text-navy">Kerala Backwater & Beaches Tour</h3>
+                    <p class="text-sm text-charcoal/80 font-light leading-relaxed">
+                        Unwind in South India with luxury tea plantation stays in Munnar, private houseboat cruises in Alleppey, and coastal relaxation in Kovalam.
+                    </p>
+                    <div class="pt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-widest text-tealDeep">Tropical & Ayurveda</span>
+                        <button onclick="openTourModal('kerala-tour')" class="px-6 py-3 rounded-full bg-navy text-softWhite text-xs font-semibold tracking-wider uppercase hover:bg-tealElectric hover:text-navy transition-all">View Journey →</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 05 — TOUR DETAIL MODAL / DRAWER -->
+    <div id="tourModal" class="fixed inset-0 z-50 bg-navy/90 backdrop-blur-xl flex justify-end opacity-0 pointer-events-none transition-all duration-500">
+        <div class="w-full max-w-3xl bg-navy h-full overflow-y-auto p-8 border-l border-tealElectric/20 relative text-softWhite">
+            <button onclick="closeTourModal()" class="absolute top-6 right-6 p-2 rounded-full bg-tealDeep text-softWhite hover:bg-coral transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+
+            <img id="modalImg" src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80" alt="Tour Modal Hero" class="w-full h-64 object-cover rounded-2xl mb-8 border border-tealElectric/20">
+
+            <span id="modalRoute" class="text-xs font-bold uppercase tracking-widest text-tealElectric">Delhi · Agra · Jaipur</span>
+            <h2 id="modalTitle" class="font-serif text-4xl text-softWhite mt-1 mb-2">Golden Triangle Tour</h2>
+            <p id="modalDuration" class="text-sm text-coral font-semibold mb-6">Duration: 5 Days / 4 Nights</p>
+
+            <div class="space-y-6 text-sm text-ice/80 font-light leading-relaxed border-t border-tealDeep pt-6">
+                <h3 class="font-serif text-xl text-softWhite font-normal">Journey Overview</h3>
+                <p id="modalDesc">
+                    Designed for travelers looking for a seamlessly managed private journey through India's Golden Triangle. Travel in air-conditioned comfort with a dedicated chauffeur and private city guides.
+                </p>
+
+                <h3 class="font-serif text-xl text-softWhite font-normal pt-4">Highlights</h3>
+                <ul class="list-disc list-inside space-y-2 text-xs">
+                    <li>Sunrise guided viewing of the Taj Mahal in Agra.</li>
+                    <li>Private Elephant or Jeep ride to Amber Fort, Jaipur.</li>
+                    <li>Full day Old & New Delhi heritage tour (Jama Masjid, Humayun Tomb).</li>
+                    <li>Dedicated luxury sedan or SUV (Toyota Innova Crysta).</li>
+                </ul>
+
+                <h3 class="font-serif text-xl text-softWhite font-normal pt-4">Inclusions & Support</h3>
+                <p class="text-xs text-ice/70">
+                    Includes private AC vehicle, bottled water, driver allowances, toll taxes, state taxes, fuel, and licensed local English-speaking city tour guides.
+                </p>
+            </div>
+
+            <!-- Sticky CTA Inside Drawer -->
+            <div class="sticky bottom-0 bg-navy/95 backdrop-blur-md pt-6 pb-2 border-t border-tealDeep mt-10">
+                <a href="#planner" onclick="closeTourModal()" class="w-full py-4 rounded-full bg-tealElectric text-navy font-bold text-center block text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(25,183,165,0.7)] transition-all">
+                    Plan This Journey →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 06 — SERVICES -->
+    <section class="py-28 px-6 lg:px-16 bg-navy text-softWhite border-t border-tealDeep/40">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <span class="text-xs font-bold tracking-[0.3em] text-tealElectric uppercase">OUR CORE STANDARDS</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-light mt-2">Travel, Seamlessly.</h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <!-- Service 1 -->
+            <div class="glass-panel p-6 rounded-2xl border border-tealElectric/10 hover:border-tealElectric/50 transition-all text-center group">
+                <div class="w-14 h-14 mx-auto rounded-full bg-tealDeep/50 flex items-center justify-center text-tealElectric mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h8m-8 4h8m-4 4h4m1 4H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2z"/></svg>
+                </div>
+                <h3 class="font-serif text-lg font-normal text-softWhite">Private Transport</h3>
+                <p class="text-xs text-ice/60 mt-2">Clean, insured sedans & Innova Crysta SUVs with veteran drivers.</p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="glass-panel p-6 rounded-2xl border border-tealElectric/10 hover:border-tealElectric/50 transition-all text-center group">
+                <div class="w-14 h-14 mx-auto rounded-full bg-tealDeep/50 flex items-center justify-center text-tealElectric mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                </div>
+                <h3 class="font-serif text-lg font-normal text-softWhite">Local Guides</h3>
+                <p class="text-xs text-ice/60 mt-2">Certified local guides sharing authentic history & background.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="glass-panel p-6 rounded-2xl border border-tealElectric/10 hover:border-tealElectric/50 transition-all text-center group">
+                <div class="w-14 h-14 mx-auto rounded-full bg-tealDeep/50 flex items-center justify-center text-tealElectric mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                </div>
+                <h3 class="font-serif text-lg font-normal text-softWhite">Hotel Bookings</h3>
+                <p class="text-xs text-ice/60 mt-2">Bespoke luxury stays from heritage havelis to eco-resorts.</p>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="glass-panel p-6 rounded-2xl border border-tealElectric/10 hover:border-tealElectric/50 transition-all text-center group">
+                <div class="w-14 h-14 mx-auto rounded-full bg-tealDeep/50 flex items-center justify-center text-tealElectric mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                </div>
+                <h3 class="font-serif text-lg font-normal text-softWhite">Tailor-Made</h3>
+                <p class="text-xs text-ice/60 mt-2">Fully flexible daily schedules mapped around your exact pace.</p>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="glass-panel p-6 rounded-2xl border border-tealElectric/10 hover:border-tealElectric/50 transition-all text-center group">
+                <div class="w-14 h-14 mx-auto rounded-full bg-tealDeep/50 flex items-center justify-center text-tealElectric mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </div>
+                <h3 class="font-serif text-lg font-normal text-softWhite">24/7 Support</h3>
+                <p class="text-xs text-ice/60 mt-2">Direct WhatsApp and phone assistance during your travel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 07 — WHY RAJ TOUR -->
+    <section id="about" class="py-28 px-6 lg:px-16 bg-navy relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Split Image -->
+            <div class="lg:col-span-6 relative">
+                <div class="relative rounded-3xl overflow-hidden border border-tealElectric/20 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80" alt="Authentic Indian Journey" class="w-full h-[550px] object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- Right Headline & Revealed Benefits -->
+            <div class="lg:col-span-6 space-y-8">
+                <span class="text-xs font-bold tracking-[0.3em] text-tealElectric uppercase">THE RAJ TOUR ADVANTAGE</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-softWhite font-light leading-tight">
+                    India expertise, <br>
+                    <span class="italic text-tealElectric">without the ordinary.</span>
+                </h2>
+
+                <div class="space-y-6 pt-4">
+                    <div class="flex items-start gap-4">
+                        <span class="text-coral font-bold font-serif text-xl">01</span>
+                        <div>
+                            <h3 class="font-serif text-lg text-softWhite">Experience Since 1995</h3>
+                            <p class="text-xs text-ice/70 mt-1 leading-relaxed">Three decades of operational integrity, maintaining deep relationships with hotels, transport networks, and local guides across India.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="text-tealElectric font-bold font-serif text-xl">02</span>
+                        <div>
+                            <h3 class="font-serif text-lg text-softWhite">Private & Unhurried Travel</h3>
+                            <p class="text-xs text-ice/70 mt-1 leading-relaxed">No rigid group schedules. You travel at your speed with dedicated private vehicles and dedicated drivers.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="text-coral font-bold font-serif text-xl">03</span>
+                        <div>
+                            <h3 class="font-serif text-lg text-softWhite">Verified Local Knowledge</h3>
+                            <p class="text-xs text-ice/70 mt-1 leading-relaxed">Headquartered in Agra with verified staff offering transparent pricing and real-time guidance.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="text-tealElectric font-bold font-serif text-xl">04</span>
+                        <div>
+                            <h3 class="font-serif text-lg text-softWhite">Personal Support</h3>
+                            <p class="text-xs text-ice/70 mt-1 leading-relaxed">Continuous check-ins throughout your trip to guarantee satisfaction and address special requests in real time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 08 — BESPOKE TIMELINE -->
+    <section class="py-28 px-6 lg:px-16 bg-tealDeep/20 border-y border-tealDeep/50 relative">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <span class="text-xs font-bold tracking-[0.3em] text-coral uppercase">BESPOKE CURATION</span>
+            <h2 class="font-serif text-4xl md:text-5xl text-softWhite font-light mt-2">
+                Your journey should move at your pace.
+            </h2>
+        </div>
+
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <!-- Step 1 -->
+            <div class="glass-panel p-8 rounded-3xl border border-tealElectric/20 relative group hover:border-tealElectric transition-all">
+                <span class="text-4xl font-serif text-tealElectric font-bold opacity-40 group-hover:opacity-100 transition-opacity">01</span>
+                <h3 class="font-serif text-xl text-softWhite mt-4">Tell Us</h3>
+                <p class="text-xs text-ice/70 mt-2 leading-relaxed">Share your dates, budget, places on your bucket list, and preferred travel pace.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="glass-panel p-8 rounded-3xl border border-tealElectric/20 relative group hover:border-tealElectric transition-all">
+                <span class="text-4xl font-serif text-coral font-bold opacity-40 group-hover:opacity-100 transition-opacity">02</span>
+                <h3 class="font-serif text-xl text-softWhite mt-4">We Design</h3>
+                <p class="text-xs text-ice/70 mt-2 leading-relaxed">Our Agra specialists craft a custom route with handpicked hotels, driver allocations, and guides.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="glass-panel p-8 rounded-3xl border border-tealElectric/20 relative group hover:border-tealElectric transition-all">
+                <span class="text-4xl font-serif text-tealElectric font-bold opacity-40 group-hover:opacity-100 transition-opacity">03</span>
+                <h3 class="font-serif text-xl text-softWhite mt-4">You Experience</h3>
+                <p class="text-xs text-ice/70 mt-2 leading-relaxed">Arrive in India with everything pre-arranged, private transfers ready, and 24/7 travel care.</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="#planner" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-coral text-softWhite font-semibold text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(255,112,88,0.6)] transition-all">
+                Design My Journey →
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION 09 — TRAVEL JOURNAL -->
+    <section id="journal" class="py-28 px-6 lg:px-16 bg-softWhite text-charcoal">
+        <div class="max-w-7xl mx-auto mb-16">
+            <span class="text-xs font-bold tracking-[0.3em] text-tealDeep uppercase">TRAVEL JOURNAL</span>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy font-light mt-2">Stories, Guides & Inspiration</h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Large Featured Article (7 cols) -->
+            <div class="lg:col-span-7 group cursor-pointer">
+                <div class="rounded-3xl overflow-hidden h-96 relative mb-6">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80" alt="Taj Mahal Sunrise Guide" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent"></div>
+                    <span class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-tealElectric text-navy text-[10px] font-bold uppercase tracking-widest">Guide</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-xs text-charcoal/60 font-semibold tracking-wider">MARCH 2026 · 6 MIN READ</div>
+                    <h3 class="font-serif text-3xl text-navy group-hover:text-tealDeep transition-colors">How to Experience the Taj Mahal Without the Crowds</h3>
+                    <p class="text-sm text-charcoal/80 font-light leading-relaxed">Our insider timing recommendations for private dawn entry, photographer vantage points, and quiet gardens across the Yamuna.</p>
+                </div>
+            </div>
+
+            <!-- 2 Smaller Editorial Articles (5 cols) -->
+            <div class="lg:col-span-5 space-y-8">
+                <!-- Small 1 -->
+                <div class="flex gap-6 group cursor-pointer items-center border-b border-charcoal/10 pb-8">
+                    <div class="w-32 h-28 rounded-2xl overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=80" alt="Kerala Backwaters Article" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-tealDeep">DESTINATION</span>
+                        <h4 class="font-serif text-lg text-navy group-hover:text-tealDeep transition-colors">The Calm Waters of Alleppey</h4>
+                        <p class="text-xs text-charcoal/70 line-clamp-2">Navigating Kerala’s private houseboat routes and local spice estates.</p>
+                    </div>
+                </div>
+
+                <!-- Small 2 -->
+                <div class="flex gap-6 group cursor-pointer items-center">
+                    <div class="w-32 h-28 rounded-2xl overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=500&q=80" alt="Rajasthan Heritage Havelis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-coral">HERITAGE</span>
+                        <h4 class="font-serif text-lg text-navy group-hover:text-tealDeep transition-colors">Inside Rajasthan’s Palaces</h4>
+                        <p class="text-xs text-charcoal/70 line-clamp-2">A guide to staying in restored 18th-century royal havelis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10 — VERIFIED GUEST REVIEWS -->
+    <section id="reviews" class="py-28 px-6 lg:px-16 bg-navy border-t border-tealDeep/40">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <span class="text-xs font-bold tracking-[0.3em] text-tealElectric uppercase">GENUINE REVIEWS</span>
+            <h2 class="font-serif text-4xl md:text-5xl text-softWhite font-light mt-2">Real People. Meaningful Journeys.</h2>
+            <p class="text-xs text-ice/60 mt-2">Verified guest feedback from our TourRadar and online bookings.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="glass-panel p-8 rounded-3xl border border-tealElectric/20 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex text-coral text-sm">★★★★★</div>
+                    <p class="text-sm text-ice/90 font-light italic leading-relaxed">
+                        "Very good tour, you won't regret it. He even supported me with my further stay in India, and I'm very thankful as I was traveling solo. Thank you very much for everything!"
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-tealDeep/50">
+                    <p class="font-serif text-softWhite text-sm font-semibold">Solo Guest Travel Review</p>
+                    <p class="text-[10px] text-tealElectric uppercase tracking-wider">Verified Guest · TourRadar</p>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="glass-panel p-8 rounded-3xl border border-tealElectric/20 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex text-coral text-sm">★★★★★</div>
+                    <p class="text-sm text-ice/90 font-light italic leading-relaxed">
+                        "Excellent service and on-time pickup. The owner was very supportive and helpful throughout the entire trip. Clean vehicle and smooth driving across cities."
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-tealDeep/50">
+                    <p class="font-serif text-softWhite text-sm font-semibold">Vineet Raul</p>
+                    <p class="text-[10px] text-tealElectric uppercase tracking-wider">Verified Booking · Private Tour</p>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="glass-panel p-8 rounded-3xl border border-tealElectric/20 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex text-coral text-sm">★★★★★</div>
+                    <p class="text-sm text-ice/90 font-light italic leading-relaxed">
+                        "Witnessed the sunrise at the Taj Mahal and visited Amber Fort in Jaipur. The private driver and city guides were punctual, polite, and made us feel safe throughout."
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-tealDeep/50">
+                    <p class="font-serif text-softWhite text-sm font-semibold">Golden Triangle Guest</p>
+                    <p class="text-[10px] text-tealElectric uppercase tracking-wider">Luxury Circuit Booking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11 — MULTI-STEP TRIP PLANNER -->
+    <section id="planner" class="py-28 px-6 lg:px-16 bg-tealDeep/20 border-t border-tealDeep/50 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold tracking-[0.3em] text-tealElectric uppercase">BESPOKE TRIP BUILDER</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-softWhite font-light mt-2">Let’s Create Your India Story</h2>
+            </div>
+
+            <!-- Form Wrapper -->
+            <div class="glass-panel p-8 md:p-12 rounded-3xl border border-tealElectric/30">
+                <!-- Step Bar Indicator -->
+                <div class="flex items-center justify-between mb-10 pb-6 border-b border-tealDeep text-xs font-semibold">
+                    <span id="stepIndicator1" class="text-tealElectric">01 Where</span>
+                    <span id="stepIndicator2" class="text-ice/40">02 When</span>
+                    <span id="stepIndicator3" class="text-ice/40">03 Who</span>
+                    <span id="stepIndicator4" class="text-ice/40">04 Style</span>
+                    <span id="stepIndicator5" class="text-ice/40">05 Details</span>
+                </div>
+
+                <form id="multiStepForm" onsubmit="handlePlannerSubmit(event)">
+                    <!-- Step 01: Where -->
+                    <div id="step1" class="space-y-6">
+                        <h3 class="font-serif text-2xl text-softWhite">01 / Where would you like to travel?</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="checkbox" name="destinations" value="Golden Triangle" class="accent-tealElectric"> Golden Triangle
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="checkbox" name="destinations" value="Rajasthan" class="accent-tealElectric"> Rajasthan
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="checkbox" name="destinations" value="Kerala" class="accent-tealElectric"> Kerala
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="checkbox" name="destinations" value="Varanasi" class="accent-tealElectric"> Varanasi
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="checkbox" name="destinations" value="Himalayas" class="accent-tealElectric"> Himalayas
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="checkbox" name="destinations" value="Wildlife" class="accent-tealElectric"> Wildlife Safari
+                            </label>
+                        </div>
+                        <div class="pt-6 flex justify-end">
+                            <button type="button" onclick="goToStep(2)" class="px-8 py-3 rounded-full bg-tealElectric text-navy font-bold text-xs uppercase tracking-wider">Next Step →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 02: When -->
+                    <div id="step2" class="space-y-6 hidden">
+                        <h3 class="font-serif text-2xl text-softWhite">02 / When are you planning to visit?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Target Month / Date</label>
+                                <input type="text" placeholder="e.g. November 2026" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Duration (Days)</label>
+                                <input type="text" placeholder="e.g. 7-10 Days" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                            </div>
+                        </div>
+                        <div class="pt-6 flex justify-between">
+                            <button type="button" onclick="goToStep(1)" class="px-6 py-3 rounded-full border border-tealElectric/40 text-xs uppercase text-softWhite">Back</button>
+                            <button type="button" onclick="goToStep(3)" class="px-8 py-3 rounded-full bg-tealElectric text-navy font-bold text-xs uppercase tracking-wider">Next Step →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 03: Who -->
+                    <div id="step3" class="space-y-6 hidden">
+                        <h3 class="font-serif text-2xl text-softWhite">03 / Who is traveling?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Number of Adults</label>
+                                <input type="number" min="1" value="2" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Children (if any)</label>
+                                <input type="number" min="0" value="0" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                            </div>
+                        </div>
+                        <div class="pt-6 flex justify-between">
+                            <button type="button" onclick="goToStep(2)" class="px-6 py-3 rounded-full border border-tealElectric/40 text-xs uppercase text-softWhite">Back</button>
+                            <button type="button" onclick="goToStep(4)" class="px-8 py-3 rounded-full bg-tealElectric text-navy font-bold text-xs uppercase tracking-wider">Next Step →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 04: Style -->
+                    <div id="step4" class="space-y-6 hidden">
+                        <h3 class="font-serif text-2xl text-softWhite">04 / Select Your Travel Style</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="radio" name="style" value="Luxury" class="accent-tealElectric"> Luxury Heritage
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="radio" name="style" value="Culture" class="accent-tealElectric"> Culture & Sacred
+                            </label>
+                            <label class="p-4 rounded-xl glass-panel border border-tealElectric/20 hover:border-tealElectric cursor-pointer text-xs font-medium flex items-center gap-3">
+                                <input type="radio" name="style" value="Relaxed" class="accent-tealElectric"> Relaxed Pace
+                            </label>
+                        </div>
+                        <div class="pt-6 flex justify-between">
+                            <button type="button" onclick="goToStep(3)" class="px-6 py-3 rounded-full border border-tealElectric/40 text-xs uppercase text-softWhite">Back</button>
+                            <button type="button" onclick="goToStep(5)" class="px-8 py-3 rounded-full bg-tealElectric text-navy font-bold text-xs uppercase tracking-wider">Final Step →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 05: Details -->
+                    <div id="step5" class="space-y-6 hidden">
+                        <h3 class="font-serif text-2xl text-softWhite">05 / Your Contact Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Full Name *</label>
+                                <input type="text" required placeholder="e.g. Sarah Jenkins" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Email Address *</label>
+                                <input type="email" required placeholder="sarah@example.com" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Phone / WhatsApp *</label>
+                            <input type="tel" required placeholder="+1 555 019 2831" class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-ice/70 mb-2">Special Requests or Hotel Preferences</label>
+                            <textarea rows="3" placeholder="Tell us any specific requirements..." class="w-full bg-navy/80 border border-tealElectric/30 rounded-xl p-4 text-sm text-softWhite focus:outline-none focus:border-tealElectric"></textarea>
+                        </div>
+                        <div class="pt-6 flex justify-between">
+                            <button type="button" onclick="goToStep(4)" class="px-6 py-3 rounded-full border border-tealElectric/40 text-xs uppercase text-softWhite">Back</button>
+                            <button type="submit" class="px-10 py-4 rounded-full bg-coral text-softWhite font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_25px_rgba(255,112,88,0.7)] transition-all">Submit Trip Request →</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Success State Box -->
+                <div id="plannerSuccess" class="hidden text-center py-12 space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-tealElectric text-navy mx-auto flex items-center justify-center font-bold text-2xl">✓</div>
+                    <h3 class="font-serif text-3xl text-softWhite">Journey Request Received</h3>
+                    <p class="text-sm text-ice/80 max-w-md mx-auto">
+                        Thank you for reaching out to Raj Tour Travels. Our senior itinerary specialists will craft a tailored proposal and contact you within 24 hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA HERO -->
+    <section class="relative py-36 px-6 lg:px-16 overflow-hidden flex items-center justify-center text-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=2000&q=80" alt="India Sunset Final" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-navy/80 backdrop-blur-xs"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto space-y-8">
+            <h2 class="font-serif text-4xl md:text-6xl text-softWhite font-light leading-tight">
+                Ready to experience India differently?
+            </h2>
+            <p class="text-base text-ice/80 font-light max-w-xl mx-auto">
+                Speak directly with our local journey planners in Agra or begin customizing your private route online today.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
+                <a href="#planner" class="w-full sm:w-auto px-8 py-4 rounded-full bg-tealElectric text-navy font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_30px_rgba(25,183,165,0.7)] transition-all">
+                    Plan My Trip →
+                </a>
+                <a href="https://wa.me/919756686666" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-full glass-panel text-softWhite border border-ice/20 hover:border-tealElectric text-xs uppercase font-semibold tracking-wider transition-all">
+                    Talk to a Specialist (+91 975 668 6666)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy border-t border-tealDeep/50 text-softWhite py-20 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-tealDeep/40">
+            <!-- Col 1 Brand -->
+            <div class="lg:col-span-2 space-y-4">
+                <span class="font-serif text-2xl font-bold tracking-widest">RAJ TOUR TRAVELS</span>
+                <p class="text-[10px] text-tealElectric uppercase tracking-widest font-semibold">EST. 1995 · AGRA, INDIA</p>
+                <p class="text-xs text-ice/60 max-w-sm leading-relaxed pt-2">
+                    A registered A-Class tour operator and private transport service provider delivering authentic, unhurried journeys across India.
+                </p>
+            </div>
+
+            <!-- Col 2 Navigation -->
+            <div class="space-y-3">
+                <h4 class="font-serif text-sm uppercase tracking-wider text-tealElectric">Explore</h4>
+                <ul class="space-y-2 text-xs text-ice/70">
+                    <li><a href="#destinations" class="hover:text-tealElectric">Destinations</a></li>
+                    <li><a href="#journeys" class="hover:text-tealElectric">Journeys</a></li>
+                    <li><a href="#interactive-map" class="hover:text-tealElectric">Experiences</a></li>
+                    <li><a href="#journal" class="hover:text-tealElectric">Travel Journal</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3 Company -->
+            <div class="space-y-3">
+                <h4 class="font-serif text-sm uppercase tracking-wider text-tealElectric">Company</h4>
+                <ul class="space-y-2 text-xs text-ice/70">
+                    <li><a href="#about" class="hover:text-tealElectric">About Us</a></li>
+                    <li><a href="#reviews" class="hover:text-tealElectric">Guest Reviews</a></li>
+                    <li><a href="#" class="hover:text-tealElectric">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-tealElectric">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4 Direct Contact -->
+            <div class="space-y-3">
+                <h4 class="font-serif text-sm uppercase tracking-wider text-tealElectric">Contact HQ</h4>
+                <div class="space-y-2 text-xs text-ice/70">
+                    <p>Phone / WhatsApp: <br><a href="tel:+919756686666" class="text-softWhite font-semibold hover:text-tealElectric">+91 975 668 6666</a></p>
+                    <p>Email: <br><a href="mailto:info@rajtourtravels.com" class="text-softWhite font-semibold hover:text-tealElectric">info@rajtourtravels.com</a></p>
+                    <p>Headquarters: <br>Agra, Uttar Pradesh, India</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-ice/40">
+            <p>© 2026 Raj Tour Travels. All rights reserved. India in Motion Version 7.</p>
+            <div class="flex items-center space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-tealElectric">Instagram</a>
+                <a href="#" class="hover:text-tealElectric">Facebook</a>
+                <a href="#" class="hover:text-tealElectric">TripAdvisor</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Scroll Progress Bar & Sticky Header Transformation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+
+            const header = document.getElementById("mainHeader");
+            if (winScroll > 80) {
+                header.classList.add("bg-navy/90", "backdrop-blur-md", "shadow-xl", "py-4");
+                header.classList.remove("py-6");
+            } else {
+                header.classList.remove("bg-navy/90", "backdrop-blur-md", "shadow-xl", "py-4");
+                header.classList.add("py-6");
+            }
+
+            // Parallax effect on hero image
+            const heroBg = document.getElementById("heroBg");
+            if (heroBg) {
+                heroBg.style.transform = `scale(${1 + winScroll * 0.0003}) translateY(${winScroll * 0.15}px)`;
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("opacity-0");
+            menu.classList.toggle("pointer-events-none");
+        }
+
+        // Horizontal Gallery Scrolling
+        function scrollGallery(offset) {
+            const container = document.getElementById("destContainer");
+            container.scrollBy({ left: offset, behavior: 'smooth' });
+        }
+
+        // Interactive Map Node Data
+        const mapData = {
+            ladakh: {
+                title: "Ladakh",
+                tag: "High Altitude Wilderness",
+                img: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80",
+                desc: "Explore high-mountain Buddhist monasteries, Pangong Tso lake, and high-altitude alpine drives with verified drivers."
+            },
+            rajasthan: {
+                title: "Rajasthan",
+                tag: "Royal Fortresses & Deserts",
+                img: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+                desc: "Discover Jaipur's Amber Fort, Jodhpur's blue city streets, and lake luxury in Udaipur with private chauffeur service."
+            },
+            agra: {
+                title: "Agra",
+                tag: "HQ & Monument Hub",
+                img: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+                desc: "Home of the Taj Mahal and Agra Fort. Our central operations hub guarantees top-rated chauffeur transfers and instant local assistance."
+            },
+            varanasi: {
+                title: "Varanasi",
+                tag: "Sacred Ganges Ghats",
+                img: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=800&q=80",
+                desc: "Experience spiritual India with private dawn boat cruises along the Ganges and reserved seating at evening Aarti ceremonies."
+            },
+            mumbai: {
+                title: "Mumbai",
+                tag: "Coastal Metropolis",
+                img: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+                desc: "Bespoke urban architecture walks, Gateway of India tours, and seamless airport connection services."
+            },
+            kerala: {
+                title: "Kerala",
+                tag: "Tropical Backwaters",
+                img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+                desc: "Private luxury houseboat cruises through Alleppey, tea gardens of Munnar, and Arabian Sea beach retreats."
+            }
+        };
+
+        function updateMapDetail(key) {
+            const data = mapData[key];
+            if (!data) return;
+
+            const card = document.getElementById("mapPreviewCard");
+            card.style.opacity = "0.3";
+            card.style.transform = "translateY(10px)";
+
+            setTimeout(() => {
+                document.getElementById("mapCardTitle").innerText = data.title;
+                document.getElementById("mapCardTag").innerText = data.tag;
+                document.getElementById("mapCardImg").src = data.img;
+                document.getElementById("mapCardDesc").innerText = data.desc;
+
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+            }, 250);
+        }
+
+        // Tour Detail Modal Functions & Data
+        const toursData = {
+            'golden-triangle': {
+                title: "Golden Triangle Tour",
+                route: "Delhi · Agra · Jaipur",
+                duration: "Duration: 4 to 5 Days",
+                img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80",
+                desc: "India's landmark cultural route executed with absolute perfection. Private AC Toyota Innova Crysta transfers, early sunrise Taj Mahal tickets, and personal heritage guides in every city."
+            },
+            'tiger-tour': {
+                title: "Golden Triangle & Tiger Safari",
+                route: "Delhi · Agra · Ranthambore · Jaipur",
+                duration: "Duration: 7 Days / 6 Nights",
+                img: "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=80",
+                desc: "Combines grand Mughal and Rajput architecture with private open-top 4x4 tiger safaris in Ranthambore National Park."
+            },
+            'varanasi-tour': {
+                title: "Golden Triangle with Varanasi",
+                route: "Delhi · Jaipur · Agra · Varanasi",
+                duration: "Duration: 8 Days / 7 Nights",
+                img: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80",
+                desc: "An extended spiritual journey connecting palace heritage with private Ganges boat cruises and evening Aarti ceremonies in Varanasi."
+            },
+            'kerala-tour': {
+                title: "Kerala Backwater & Beaches",
+                route: "Cochin · Munnar · Alleppey · Kovalam",
+                duration: "Duration: 6 Days / 5 Nights",
+                img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80",
+                desc: "Unwind on private air-conditioned houseboats, explore tea gardens, and experience authentic Ayurvedic treatments along Kerala's coastline."
+            }
+        };
+
+        function openTourModal(key) {
+            const data = toursData[key];
+            if (data) {
+                document.getElementById("modalTitle").innerText = data.title;
+                document.getElementById("modalRoute").innerText = data.route;
+                document.getElementById("modalDuration").innerText = data.duration;
+                document.getElementById("modalImg").src = data.img;
+                document.getElementById("modalDesc").innerText = data.desc;
+            }
+
+            const modal = document.getElementById("tourModal");
+            modal.classList.remove("opacity-0", "pointer-events-none");
+        }
+
+        function closeTourModal() {
+            const modal = document.getElementById("tourModal");
+            modal.classList.add("opacity-0", "pointer-events-none");
+        }
+
+        // Multi-Step Planner Logic
+        function goToStep(stepNumber) {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`step${i}`).classList.add("hidden");
+                const indicator = document.getElementById(`stepIndicator${i}`);
+                if (i <= stepNumber) {
+                    indicator.classList.remove("text-ice/40");
+                    indicator.classList.add("text-tealElectric");
+                } else {
+                    indicator.classList.remove("text-tealElectric");
+                    indicator.classList.add("text-ice/40");
+                }
+            }
+            document.getElementById(`step${stepNumber}`).classList.remove("hidden");
+        }
+
+        function handlePlannerSubmit(event) {
+            event.preventDefault();
+            document.getElementById("multiStepForm").classList.add("hidden");
+            document.getElementById("plannerSuccess").classList.remove("hidden");
+        }
+
+        function toggleSearchModal() {
+            alert("Search travel destinations across India (e.g., 'Taj Mahal', 'Kerala Backwaters', 'Tiger Safari')");
+        }
+    </script>
+</body>
+</html>
